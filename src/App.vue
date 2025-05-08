@@ -1,8 +1,30 @@
 <script setup>
 // Component logic can be added here
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import Card from './components/Card.vue';
 import Logo from './components/Logo.vue';
+
+// Show/hide "Go to Top" button based on scroll position
+const showGoToTop = ref(false);
+
+const checkScroll = () => {
+  showGoToTop.value = window.scrollY > 500;
+};
+
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', checkScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', checkScroll);
+});
 
 // Function to dynamically import images
 const getImageUrl = (imagePath) => {
@@ -296,11 +318,11 @@ const loadMoreGallery = () => {
 
             <img src="/img/sc/preview-3.png" alt="JETCOFFEE Dashboard Preview" class="
              w-full rounded-lg shadow-elegant hover:z-10 transform hover:scale-102 transition-transform duration-500
-            absolute top-16 left-6
+            absolute top-16 left-16
             "/>
 
-            <img src="/img/sc/preview.png" alt="JETCOFFEE Dashboard Preview" class="
-            absolute top-32 left-12 w-full rounded-lg hover:z-10 shadow-elegant transform hover:scale-102 transition-transform duration-500" />
+            <img src="/img/sc/light/dashboard/crm.png" alt="JETCOFFEE Dashboard Preview" class="
+            absolute top-32 left-32 w-full rounded-lg hover:z-10 shadow-elegant transform hover:scale-102 transition-transform duration-500" />
 
            
           </div>
@@ -313,8 +335,8 @@ const loadMoreGallery = () => {
       <div class="container mx-auto px-6">
         <div class="text-center mb-20">
           <span class="text-coffee-primary font-medium uppercase tracking-wider text-sm font-heading">Premium Features</span>
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mt-4 font-heading tracking-tight">Designed for Excellence</h2>
-          <div class="w-24 h-1 bg-coffee-primary mx-auto mt-8 rounded-full"></div>
+          <h2 class="text-4xl md:text-2xl font-bold text-gray-900 mt-4 font-heading tracking-tight uppercase">Designed for Excellence</h2>
+          <div class="w-24 h-1 bg-coffee-primary mx-auto mt-2 rounded-full"></div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           <div class="bg-white rounded-lg p-10 shadow-premium border border-gray-100 transition-all hover:border-coffee-primary hover:-translate-y-2">
@@ -548,7 +570,10 @@ const loadMoreGallery = () => {
             <div class="md:col-span-5">
               <div class="relative">
                 <div class="absolute -inset-1 bg-gradient-gold opacity-20 blur-md rounded-lg"></div>
-                <img src="./assets/dashboard-preview.svg" alt="Pre-applications Preview" class="relative w-full rounded-lg shadow-elegant" />
+                <img src="/public/img/sc/dark/apps/3.png" alt="Pre-applications Preview" class="relative w-full rounded-lg shadow-elegant" />
+                <img src="/public/img/sc/light/apps/email.png" alt="Pre-applications Preview" class="absolute
+                top-12 left-12
+                w-full rounded-lg shadow-elegant" />
               </div>
             </div>
           </div>
@@ -557,7 +582,7 @@ const loadMoreGallery = () => {
     </section>
 
     <!-- Screenshots Section -->
-    <section id="screenshots" class="py-28 bg-coffee-light">
+    <section id="light-mode" class="py-28 bg-coffee-light">
       <div class="container mx-auto px-6">
         <div class="text-center mb-20">
           <span class="text-coffee-primary font-medium uppercase tracking-wider text-sm font-heading">Theme Variants</span>
@@ -677,9 +702,8 @@ const loadMoreGallery = () => {
     </section>
     
 
-
     <!-- Gallery Section -->
-    <section id="gallery" class="py-28 bg-gray-50">
+    <section id="dark-mode" class="py-28 bg-gray-50">
       <div class="container mx-auto px-6">
         <div class="text-center mb-20">
           <span class="text-coffee-primary font-medium uppercase tracking-wider text-sm font-heading">Theme Variants</span>
@@ -802,7 +826,7 @@ const loadMoreGallery = () => {
 
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="mb-12 bg-white">
+    <section id="tech-stack" class="mb-12 bg-white">
       <div class="container mx-auto px-6">
         <div class="text-center mb-20">
           <span class="text-coffee-primary font-medium uppercase tracking-wider text-sm font-heading">Technologies</span>
@@ -907,6 +931,17 @@ const loadMoreGallery = () => {
       </div>
     </footer>
   </div>
+
+  <!-- Go to Top Button -->
+  <button 
+    v-show="showGoToTop" 
+    @click="scrollToTop"
+    class="fixed bottom-8 right-8 p-3 rounded-full bg-coffee-primary text-white shadow-lg hover:bg-coffee-dark z-50 transform hover:scale-110 transition-all duration-300"
+    aria-label="Go to top">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </button>
 </template>
 
 <style>
