@@ -1,0 +1,10 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="16" cy="16" r="16" fill="rgb(99 102 241)" />
+  
+  <!-- Dashboard Icon -->
+  <rect x="8" y="8" width="7" height="7" rx="1" fill="white" />
+  <rect x="17" y="8" width="7" height="7" rx="1" fill="white" />
+  <rect x="8" y="17" width="7" height="7" rx="1" fill="white" />
+  <rect x="17" y="17" width="7" height="7" rx="1" fill="white" />
+</svg> 
