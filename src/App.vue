@@ -535,8 +535,8 @@ const loadMoreGallery = () => {
       <div class="container mx-auto px-6">
         <div class="text-center mb-20">
           <span class="text-coffee-primary font-medium uppercase tracking-wider text-sm font-heading">Theme Variants</span>
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mt-4 font-heading tracking-tight uppercase">Light Mode</h2>
-          <div class="w-24 h-1 bg-coffee-primary mx-auto mt-8 rounded-full"></div>
+          <h2 class="text-4xl md:text-2xl font-bold text-gray-900 mt-4 font-heading tracking-tight uppercase">Light Mode</h2>
+          <div class="w-24 h-1 bg-coffee-primary mx-auto mt-2 rounded-full"></div>
         </div>
         
         <div class="flex flex-col lg:flex-row gap-10">
@@ -679,8 +679,8 @@ const loadMoreGallery = () => {
       <div class="container mx-auto px-6">
         <div class="text-center mb-20">
           <span class="text-coffee-primary font-medium uppercase tracking-wider text-sm font-heading">Theme Variants</span>
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mt-4 font-heading tracking-tight uppercase">Dark Mode</h2>
-          <div class="w-24 h-1 bg-coffee-primary mx-auto mt-8 rounded-full"></div>
+          <h2 class="text-4xl md:text-2xl font-bold text-gray-900 mt-4 font-heading tracking-tight uppercase">Dark Mode</h2>
+          <div class="w-24 h-1 bg-coffee-primary mx-auto mt-2 rounded-full"></div>
         </div>
         
         <div class="flex flex-col lg:flex-row gap-10">
