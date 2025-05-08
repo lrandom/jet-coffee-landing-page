@@ -4,18 +4,17 @@ import { ref, computed } from 'vue';
 
 // Function to dynamically import images
 const getImageUrl = (imagePath) => {
-  // Check if the path starts with a slash (absolute path to public directory)
+  // If the path starts with a slash, prepend the base URL
   if (imagePath.startsWith('/')) {
-    return imagePath; // Already an absolute path to public directory
+    return import.meta.env.BASE_URL.replace(/\/$/, '') + imagePath;
   }
-  
   try {
     // For images in the assets directory
     return new URL(`./assets/${imagePath}`, import.meta.url).href;
   } catch (error) {
     console.warn(`Failed to load image from assets: ${imagePath}`, error);
     // Fallback to public directory
-    return `/${imagePath}`;
+    return import.meta.env.BASE_URL.replace(/\/$/, '') + '/' + imagePath.replace(/^\//, '');
   }
 };
 
@@ -48,10 +47,10 @@ const loadMore = () => {
 // Content for each category
 const categoryContent = {
   dashboard: [
-    { title: 'Analytics', image: '/img/sc/light/dashboard/analytics.png' },
-    { title: 'CRM', image: '/img/sc/light/dashboard/crm.png' },
-    { title: 'Project', image: '/img/sc/light/dashboard/project.png' },
-    { title: 'Ecommerce', image: '/img/sc/light/dashboard/ecommerce.png' }
+    { title: 'Analytics', image: getImageUrl('/img/sc/light/dashboard/analytics.png') },
+    { title: 'CRM', image: getImageUrl('/img/sc/light/dashboard/crm.png') },
+    { title: 'Project', image: getImageUrl('/img/sc/light/dashboard/project.png') },
+    { title: 'Ecommerce', image: getImageUrl('/img/sc/light/dashboard/ecommerce.png') }
   ],
   ecommerce: [
     { title: 'Product Listing', image: getImageUrl('/img/sc/light/ecommerce/8.png') },
@@ -121,10 +120,10 @@ const gallerySearchQuery = ref('');
 const isGalleryLoading = ref(false);
 const galleryCategories = {
   dashboard: [
-    { title: 'Analytics', image: '/img/sc/dark/dashboard/1.png' },
-    { title: 'CRM', image: '/img/sc/dark/dashboard/2.png' },
-    { title: 'Project', image: '/img/sc/dark/dashboard/3.png' },
-    { title: 'Ecommerce', image: '/img/sc/dark/dashboard/4.png' }
+    { title: 'Analytics', image: getImageUrl('/img/sc/dark/dashboard/1.png') },
+    { title: 'CRM', image: getImageUrl('/img/sc/dark/dashboard/2.png') },
+    { title: 'Project', image: getImageUrl('/img/sc/dark/dashboard/3.png') },
+    { title: 'Ecommerce', image: getImageUrl('/img/sc/dark/dashboard/4.png') }
   ],
   ecommerce: [
     { title: 'Product Listing', image: getImageUrl('/img/sc/dark/ecommerce/1.png') },
