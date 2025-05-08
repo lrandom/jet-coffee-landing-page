@@ -24,9 +24,15 @@
                   </div>
 
                   <div class="p-6 flex justify-between items-center bg-gray-50">
-                    <button class="text-md font-medium px-3
+                    <button class="text-md font-medium px-4
                      py-2 bg-coffee-primary text-white 
-                     rounded hover:bg-coffee-dark transition-colors">Preview</button>
+                     rounded-md hover:bg-coffee-dark transition-all duration-300
+                     shadow-sm hover:shadow-md flex items-center gap-2 transform hover:-translate-y-0.5">
+                      <span>Preview</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </button>
                   </div>
                 </div>
 </template>
