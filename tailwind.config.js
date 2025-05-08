@@ -18,7 +18,7 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Lato', 'sans-serif'],
+        sans: ['Montserrat', 'sans-serif'],
         heading: ['Montserrat', 'sans-serif'],
       },
       boxShadow: {

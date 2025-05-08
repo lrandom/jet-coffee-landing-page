@@ -1,6 +1,8 @@
 <script setup>
 // Component logic can be added here
 import { ref, computed } from 'vue';
+import Card from './components/Card.vue';
+import Logo from './components/Logo.vue';
 
 // Function to dynamically import images
 const getImageUrl = (imagePath) => {
@@ -207,16 +209,36 @@ const loadMoreGallery = () => {
 <template>
   <div class="min-h-screen bg-white overflow-x-hidden">
     <!-- Header -->
-    <header class="sticky top-0 bg-white shadow-premium z-50 py-5">
+    <header class="fixed top-0 left-0 right-0 bg-white shadow-premium z-50 py-5 w-full">
       <div class="container mx-auto px-6 flex justify-between items-center">
-        <div class="text-2xl font-bold text-coffee-primary font-heading tracking-wider uppercase">JETCOFFEE</div>
+        <div class="text-2xl font-bold text-gray-900
+        flex items-center gap-2
+        font-heading tracking-wider uppercase">
+          <Logo/>
+          <span class="mt-2">
+            JET<span class="text-coffee-primary">COFFEE</span>
+          </span>
+        </div>
         <nav class="hidden md:block">
           <ul class="flex gap-8">
             <li><a href="#features" class="text-gray-800 font-medium hover:text-coffee-primary transition-colors">Features</a></li>
-            <li><a href="#screenshots" class="text-gray-800 font-medium hover:text-coffee-primary transition-colors">Screenshots</a></li>
-            <li><a href="#pricing" class="text-gray-800 font-medium hover:text-coffee-primary transition-colors">Pricing</a></li>
-            <li><a href="#testimonials" class="text-gray-800 font-medium hover:text-coffee-primary transition-colors">Testimonials</a></li>
-            <li><a href="#contact" class="bg-gradient-luxury text-white px-5 py-2 rounded-md shadow-sm hover:shadow transition-all">Contact</a></li>
+            <li><a href="#light-mode" class="text-gray-800 font-medium hover:text-coffee-primary transition-colors">Light Mode</a></li>
+            <li><a href="#dark-mode" class="text-gray-800 font-medium hover:text-coffee-primary transition-colors">Dark Mode</a></li>
+            <li><a href="#tech-stack" class="text-gray-800 font-medium hover:text-coffee-primary transition-colors">Tech Stack</a></li>
+            <li>
+              <a href="#pricing" class="text-white font-medium
+               bg-indigo-500 px-4 py-2 rounded-md
+               hover:bg-indigo-600
+               transform transition-all duration-300
+               ring-2 ring-indigo-500">Buy Now</a>
+            </li>
+            <li><a href="#demo" class="font-medium
+               text-indigo-500
+               hover:ring-2 hover:text-indigo-800
+               hover:bg-indigo-50
+               transform transition-all duration-300
+               ring-2 ring-indigo-500 px-4 py-2 rounded-md
+              ">Live Preview</a></li>
           </ul>
         </nav>
       </div>
@@ -234,23 +256,25 @@ const loadMoreGallery = () => {
       <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-16 relative z-10">
         <div class="flex-1 animate-slide-in-left">
           <h1 class="text-4xl md:text-6xl font-bold mb-6 font-heading leading-tight tracking-tight">
-            A Complete <span class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500">Admin UI Kit</span> built on 
-            <span class="bg-clip-text text-transparent bg-gradient-to-r from-coffee-primary to-coffee-secondary">Svelte</span>
+            A Complete <span class="bg-clip-text text-indigo-500">Admin UI Kit</span> built on 
+            <span class="bg-clip-text  text-[#FF3E00]">SvelteKit</span>
           </h1>
           <p class="text-xl text-gray-300 mb-4 max-w-xl font-light leading-relaxed">
-             I made this because I love Svelte and I love coffee.
+             I made this because I love <span class="text-[#FF3E00]">SvelteKit</span> and <span class="text-indigo-500">Coffee</span>.
           </p>
           <div class="flex gap-6 flex-wrap">
             <div class="flex gap-4 items-center mt-4">
-              <a href="#pricing" class="bg-gradient-to-r from-coffee-primary to-coffee-secondary 
-              text-white px-8 py-4 rounded-md font-medium shadow-premium
+              <a href="#pricing" class="bg-indigo-500
+              hover:bg-indigo-600
+              text-white px-8 py-4 rounded font-medium shadow-premium
               transition-all hover:shadow-elegant hover:scale-102 flex items-center justify-center">
                 <span>
                   Buy Now
                 </span>
               </a>
+
               <a href="#demo" class="border-2 border-gray-700
-              text-white px-8 py-4 rounded-md font-medium 
+              text-white px-8 py-4 rounded font-medium 
               transition-all hover:bg-gray-800 hover:border-coffee-primary">
                 <span>
                   Live Preview
@@ -588,7 +612,7 @@ const loadMoreGallery = () => {
           <!-- Screenshot Preview Area -->
           <div class="lg:w-3/4">
             <!-- Title and search bar -->
-            <div class="flex flex-col md:flex-row justify-between items-center mb-6">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-2">
               <h2 class="text-2xl font-bold text-gray-900 mb-4 md:mb-0 capitalize">{{ activeCategory }} Templates</h2>
               
               <!-- Search -->
@@ -623,33 +647,11 @@ const loadMoreGallery = () => {
               <!-- Grid layout -->
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
                 <!-- Dynamic Content Based on Active Category -->
-                <div v-for="(item, index) in displayedContent" 
+                 <Card v-for="(item, index) in displayedContent" 
                      :key="index"
-                     class="bg-white rounded-xl shadow-premium overflow-hidden transform transition-all duration-300 hover:shadow-elegant hover:-translate-y-2 group animate-fade-in"
-                     :style="{ animationDelay: `${index * 0.05}s` }">
-                  <div class="p-4 border-b border-gray-100 flex justify-between items-center">
-                    <h3 class="text-xl font-bold text-gray-900 group-hover:text-coffee-primary transition-colors">{{ item.title }}</h3>
-                    <span class="text-xs font-medium px-2 py-1 bg-coffee-primary bg-opacity-10 text-coffee-primary rounded-full">{{ activeCategory }}</span>
-                  </div>
-                  <div class="relative overflow-hidden bg-gray-50" style="height: 300px;">
-                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                    <div class="h-full flex items-center justify-center">
-                      <img :src="item.image" :alt="item.title" class="max-w-full max-h-full object-contain transform transition-transform duration-500 group-hover:scale-105" />
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-coffee-primary to-transparent">
-                      <div class="text-white font-medium">View Details</div>
-                    </div>
-                  </div>
-                  <div class="p-4 flex justify-between items-center bg-gray-50">
-                    <div class="flex items-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-coffee-primary mr-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
-                      </svg>
-                      <span class="text-sm text-gray-600">{{ activeCategory }}</span>
-                    </div>
-                    <button class="text-xs font-medium px-3 py-1 bg-coffee-primary text-white rounded-md hover:bg-coffee-dark transition-colors">Preview</button>
-                  </div>
-                </div>
+                     :item="item"
+                     :activeCategory="activeCategory"
+                     :index="index" />
               </div>
               
               <!-- Empty state -->
@@ -732,7 +734,7 @@ const loadMoreGallery = () => {
           <!-- Gallery Preview Area -->
           <div class="lg:w-3/4">
             <!-- Title and search bar -->
-            <div class="flex flex-col md:flex-row justify-between items-center mb-6">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-2">
               <h2 class="text-2xl font-bold text-gray-900 mb-4 md:mb-0 capitalize">{{ activeGalleryCategory }} Projects</h2>
               
               <!-- Search -->
@@ -767,33 +769,13 @@ const loadMoreGallery = () => {
               <!-- Grid layout -->
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
                 <!-- Dynamic Content Based on Active Category -->
-                <div v-for="(item, index) in displayedGalleryContent" 
+             
+
+                <Card v-for="(item, index) in displayedGalleryContent" 
                      :key="index"
-                     class="bg-white rounded-xl shadow-premium overflow-hidden transform transition-all duration-300 hover:shadow-elegant hover:-translate-y-2 group animate-fade-in"
-                     :style="{ animationDelay: `${index * 0.05}s` }">
-                  <div class="p-4 border-b border-gray-100 flex justify-between items-center">
-                    <h3 class="text-xl font-bold text-gray-900 group-hover:text-coffee-primary transition-colors">{{ item.title }}</h3>
-                    <span class="text-xs font-medium px-2 py-1 bg-coffee-primary bg-opacity-10 text-coffee-primary rounded-full">{{ activeGalleryCategory }}</span>
-                  </div>
-                  <div class="relative overflow-hidden bg-gray-50" style="height: 300px;">
-                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                    <div class="h-full flex items-center justify-center">
-                      <img :src="item.image" :alt="item.title" class="max-w-full max-h-full object-contain transform transition-transform duration-500 group-hover:scale-105" />
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-coffee-primary to-transparent">
-                      <div class="text-white font-medium">View Project</div>
-                    </div>
-                  </div>
-                  <div class="p-4 flex justify-between items-center bg-gray-50">
-                    <div class="flex items-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-coffee-primary mr-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
-                      </svg>
-                      <span class="text-sm text-gray-600">{{ item.type }}</span>
-                    </div>
-                    <button class="text-xs font-medium px-3 py-1 bg-coffee-primary text-white rounded-md hover:bg-coffee-dark transition-colors">Details</button>
-                  </div>
-                </div>
+                     :item="item"
+                     :activeGalleryCategory="activeGalleryCategory"
+                     :index="index" />
               </div>
               
               <!-- Empty state -->
@@ -818,12 +800,12 @@ const loadMoreGallery = () => {
 
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="py-28 bg-white">
+    <section id="testimonials" class="mb-12 bg-white">
       <div class="container mx-auto px-6">
         <div class="text-center mb-20">
           <span class="text-coffee-primary font-medium uppercase tracking-wider text-sm font-heading">Technologies</span>
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mt-4 font-heading tracking-tight">Built with Modern Stack</h2>
-          <div class="w-24 h-1 bg-coffee-primary mx-auto mt-8 rounded-full"></div>
+          <h2 class="text-4xl md:text-2xl font-bold text-gray-900 mt-4 font-heading tracking-tight uppercase">Built with Modern Stack</h2>
+          <div class="w-24 h-1 bg-coffee-primary mx-auto mt-2 rounded-full"></div>
         </div>
         
         <div class="grid grid-cols-2 md:grid-cols-3 gap-10">
@@ -837,7 +819,7 @@ const loadMoreGallery = () => {
           
           <div class="bg-white p-8 rounded-xl shadow-premium border border-gray-100 text-center hover:border-coffee-primary hover:-translate-y-2 transition-all">
             <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-              <svg viewBox="0 0 24 24" class="w-16 h-16" xmlns="http://www.w3.org/2000/svg"><path fill="#3178C6" d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0H1.125ZM14.28 12.015c1.995 0 3.139 1.139 3.139 3.414v5.471h-2.21v-5.308c0-1.125-.57-1.687-1.454-1.687-1.093 0-1.807.924-1.807 2.475v4.52H9.738V8.729h2.21v4.742c.45-1.043 1.347-1.456 2.332-1.456Zm-7.447-4.71h2.21v13.58h-2.21V7.305Z"/><path fill="#3178C6" d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0H1.125ZM14.28 12.015c1.995 0 3.139 1.139 3.139 3.414v5.471h-2.21v-5.308c0-1.125-.57-1.687-1.454-1.687-1.093 0-1.807.924-1.807 2.475v4.52H9.738V8.729h2.21v4.742c.45-1.043 1.347-1.456 2.332-1.456Zm-7.447-4.71h2.21v13.58h-2.21V7.305Z"/></svg>
+              <img src="/img/logo/ts.png" alt="TypeScript" class="w-16 h-16">
             </div>
             <h3 class="text-2xl font-bold text-gray-900 mb-2">TypeScript</h3>
             <p class="text-gray-600">Strongly typed programming language that builds on JavaScript.</p>
@@ -845,7 +827,7 @@ const loadMoreGallery = () => {
           
           <div class="bg-white p-8 rounded-xl shadow-premium border border-gray-100 text-center hover:border-coffee-primary hover:-translate-y-2 transition-all">
             <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-              <svg viewBox="0 0 24 24" class="w-16 h-16" xmlns="http://www.w3.org/2000/svg"><path fill="#06B6D4" d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z"/></svg>
+              <img src="/img/logo/tailwindcss.png" alt="TailwindCSS" class="w-16 h-16">
             </div>
             <h3 class="text-2xl font-bold text-gray-900 mb-2">TailwindCSS</h3>
             <p class="text-gray-600">Utility-first CSS framework for rapidly building custom designs.</p>
@@ -853,7 +835,7 @@ const loadMoreGallery = () => {
           
           <div class="bg-white p-8 rounded-xl shadow-premium border border-gray-100 text-center hover:border-coffee-primary hover:-translate-y-2 transition-all">
             <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-              <svg viewBox="0 0 24 24" class="w-16 h-16" xmlns="http://www.w3.org/2000/svg"><path fill="#FF3E00" d="M19.24 3.272l-5.545 3.543a.736.736 0 00-.376.714c.327 7.631-5.525 4.321-6.86 10.546-.132.493-.9.593.126.065 2.019-5.115 8.133-4.524 8.071-10.127l-6.87 4.165c-2.292 1.381-4.5-1.248-2.246-2.702l13.007-8.332c2.317-1.359 4.599 1.092 2.449 2.8l-1.756 1.328z"/><path fill="#FF3E00" d="M16.519 17.496l-5.545-3.543a.736.736 0 00-.813-.189c-7.202 2.51.129 7.003-5.197 11.561-.389.326-.537.16.007-.175 4.38-3.336 9.25-.576 11.397-5.879L10.5 15.196c-2.53-.819-1.552-4.289 1.13-3.628L24 15.194c2.553.957 1.029 4.554-1.565 3.953l-1.97-.502 4.796 1.33c-.057-.098 1.333-1.97-4.742-2.48z"/></svg>
+              <img src="/img/logo/svelte.png" alt="Svelte" class="w-16 h-16">
             </div>
             <h3 class="text-2xl font-bold text-gray-900 mb-2">Svelte</h3>
             <p class="text-gray-600">Radical new approach to building user interfaces with minimal boilerplate.</p>
@@ -861,7 +843,7 @@ const loadMoreGallery = () => {
           
           <div class="bg-white p-8 rounded-xl shadow-premium border border-gray-100 text-center hover:border-coffee-primary hover:-translate-y-2 transition-all">
             <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-              <svg viewBox="0 0 24 24" class="w-16 h-16" xmlns="http://www.w3.org/2000/svg"><path fill="#646CFF" d="M23.0984 3.3632a.557.557 0 0 0-.5038-.7997H14.986a.5567.5567 0 0 0 0 1.1134h5.5316L8.9914 15.2269l4.4787 7.4862.2809-.4712h.014l5.0495-8.4348L23.0984 3.3632zM17.291 16.6847l-3.2504 5.4326-3.2504-5.4326 3.2504-5.4328 3.2504 5.4328zM8.1029 20.4744a.5567.5567 0 0 1-.9602.1947L1.0255 11.974a.557.557 0 0 1 0-.5962l6.1172-8.6952a.5566.5566 0 0 1 .9602.1947l3.6936 6.1723-3.6936 6.1723-3.6935 6.1723 3.6935-1.1198z"/></svg>
+              <img src="/img/logo/vite.png" alt="Vite" class="w-16 h-16">
             </div>
             <h3 class="text-2xl font-bold text-gray-900 mb-2">Vite</h3>
             <p class="text-gray-600">Next generation frontend tooling for blazing fast development experience.</p>
@@ -869,7 +851,7 @@ const loadMoreGallery = () => {
           
           <div class="bg-white p-8 rounded-xl shadow-premium border border-gray-100 text-center hover:border-coffee-primary hover:-translate-y-2 transition-all">
             <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-              <svg viewBox="0 0 24 24" class="w-16 h-16" xmlns="http://www.w3.org/2000/svg"><path fill="#DD3A0A" d="M3.204 3.204v17.592h17.592V3.204H3.204zm5.068 4.123c1.957-.063 2.29 1.72 1.22 2.303-.47.255-.973.296-1.85.428 0 .653-.006 1.2.007 1.747.018.758.304 1.071 1.062 1.083.508.007 1.013.012 1.52 0a1.043 1.043 0 0 0 1.07-1.081c.012-.741-.002-1.484.005-2.227a.866.866 0 0 1 .982-.972 7.995 7.995 0 0 1 1.013.022c.486.055.734.457.712.982-.03.756-.011 1.512-.003 2.269.012 1.287.937 2.076 2.251 2.074 1.399-.003 2.321-.77 2.327-2.094.003-.755.013-1.51-.004-2.264a.88.88 0 0 1 .932-1.002c.714-.042 1.484-.046 1.51.982.045 1.774-.732 3.078-2.277 3.924-1.089.597-2.280.794-3.521.834h-.34c-1.624 0-3.115-.301-4.38-1.268-.915-.699-1.355-1.62-1.328-2.779.007-.372.007-.744.005-1.116-.01-1.04-.31-1.385-1.361-1.452-.466-.03-.951.052-1.055-.697-.11-.785.517-.682.97-.698zm2.65 2.227c.704.001 1.453.537 1.32 1.090-.14.586-.448.647-1.044.609-1.05-.067-1.512.383-1.507 1.41.002.503.054 1.013-.015 1.508-.123.881.089 1.128.947 1.137.544.006 1.088.005 1.636-.077.958-.144 1.262-1.397.542-2.044-.376-.337-.88-.198-1.333-.282-.175-.033-.437-.053-.493-.294-.07-.301.118-.452.35-.554.831-.364 1.243-.978 1.044-1.868-.148-.667-.711-1.107-1.29-1.008-.546.093-.814.537-.766 1.167.039.504-.118.657-.667.62-.344-.023-.702-.026-.87-.426-.25-.594.288-1.14.814-1.146.444-.006.888-.002 1.332-.002v.16zm4.854 5.292c-.552.003-.828-.253-.824-.814.003-.612.274-.864.866-.862.475.001.8.237.814.733.017.547-.248.94-.856.943zm9.003-3.821c-2.726-.12-5.462.073-8.18.093-2.08.015-4.324-.202-6.242.762-1.108.556-1.235 1.453-.398 2.272.913.892 2.15 1.087 3.35 1.292 1.731.297 3.494.343 5.248.326 2.824-.028 5.647-.057 8.47-.024.359.004.719.058 1.075.115.23.037.423.148.45.413.026.28-.146.456-.361.552-.294.13-.611.207-.926.243-.47.055-.947.045-1.42.076-1.085.07-2.17.16-3.255.215-1.52.078-3.042.089-4.56.195-2.75.192-5.508.329-8.25.642-1.056.12-2.079.426-3.07.827-.704.284-.769.98-.396 1.568.61.963 1.732 1.602 2.78 2.142.593.306 1.227.508 1.873.665 6.19 1.496 12.416 1.203 18.613.412 1.457-.186 2.8-.775 3.88-1.873.642-.652.845-1.41.428-2.227-.644-1.257-1.78-1.953-3.1-2.395-.68-.227-1.383-.357-2.08-.533-.485-.122-.675-.52-.462-.992.268-.593.53-.686 1.066-.284 1.303.976 2.825 1.422 4.391 1.76 2.487.54 3.179-1.044 3.022-2.765-.156-1.704-1.509-2.15-2.866-2.597-.304-.1-.605-.204-.908-.307-.277-.094-.433-.293-.358-.598.077-.306.298-.407.578-.417.703-.025 1.405-.036 2.11-.047.283-.004.505.201.66.442.247.384.453.796.7 1.181.207.322.447.643.85.668.445.028.675-.314.873-.67.59-1.057.369-2.065-.522-2.912-1.094-1.045-2.463-1.4-3.958-1.267-.98.087-1.959.196-2.938.293-.468.046-.726-.108-.837-.578-.144-.602.151-.906.747-.927 2.16-.072 4.322-.204 6.475-.014 1.32.116 2.567.572 3.59 1.495.167.15.328.309.484.472.155.162.277.355.22.598-1.283.05-2.571.104-3.857.14z"/></svg>
+              <img src="/img/logo/postcss.png" alt="PostCSS" class="w-16 h-16">
             </div>
             <h3 class="text-2xl font-bold text-gray-900 mb-2">PostCSS</h3>
             <p class="text-gray-600">Tool for transforming CSS with JavaScript to enhance workflow and capabilities.</p>
@@ -878,6 +860,23 @@ const loadMoreGallery = () => {
       </div>
     </section>
 
+    <a href="#pricing"
+       class="bg-coffee-primary
+       hover:bg-coffee-dark
+       md:w-1/4 w-full mx-auto
+       mb-8
+       text-md
+       uppercase
+       font-semibold
+       text-white px-10 py-5 rounded-lg shadow-premium
+       transition-all duration-300 hover:shadow-elegant hover:scale-105 flex items-center justify-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+      <span>
+        Buy Now
+      </span>
+    </a>
 
 
     <!-- Footer -->
