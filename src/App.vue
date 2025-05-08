@@ -260,7 +260,9 @@ const loadMoreGallery = () => {
             <span class="bg-clip-text  text-[#FF3E00]">SvelteKit</span>
           </h1>
           <p class="text-xl text-gray-300 mb-4 max-w-xl font-light leading-relaxed">
-             I made this because I love <span class="text-[#FF3E00]">SvelteKit</span> and <span class="text-indigo-500">Coffee</span>.
+             I made this because I love <span class="text-[#FF3E00]">
+              <img src="/img/logo/svelte.png" width="30" class="inline-block"/>
+             </span> and <span class="text-indigo-500">Coffee</span>.
           </p>
           <div class="flex gap-6 flex-wrap">
             <div class="flex gap-4 items-center mt-4">
