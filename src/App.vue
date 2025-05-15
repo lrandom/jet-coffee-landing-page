@@ -254,7 +254,7 @@ const loadMoreGallery = () => {
                transform transition-all duration-300
                ring-2 ring-indigo-500">Buy Now</a>
             </li>
-            <li><a href="#demo" class="font-medium
+            <li><a href="https://jetcoffee.thevmatrix.com/" target="_blank" class="font-medium
                text-indigo-500
                hover:ring-2 hover:text-indigo-800
                hover:bg-indigo-50
@@ -297,7 +297,7 @@ const loadMoreGallery = () => {
                 </span>
               </a>
 
-              <a href="#demo" class="border-2 border-gray-700
+              <a href="https://jetcoffee.thevmatrix.com/" target="_blank" class="border-2 border-gray-700
               text-white px-8 py-4 rounded font-medium 
               transition-all hover:bg-gray-800 hover:border-coffee-primary">
                 <span>
